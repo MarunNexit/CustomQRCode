@@ -1,0 +1,69 @@
+<div class="w-full rounded-xl md:rounded-tl-xl md:rounded-bl-xl md:rounded-none bg-purple-500 dark:bg-gray-900 text-white p-4">
+  <ul class="flex flex-wrap gap-2">
+    <li class="flex-1">
+      <button (click)="selectOption(QrCodeType.URL)"
+              [ngClass]="{
+                'bg-purple-700': currentSelection === QrCodeType.URL && !isDarkMode,
+                'dark:bg-gray-700': currentSelection === QrCodeType.URL && isDarkMode,
+                'hover:bg-purple-700': !isDarkMode,
+                'dark:hover:bg-gray-700': isDarkMode
+              }"
+              class="w-full text-left p-2 rounded flex items-center space-x-2">
+        <ng-icon name="heroLink" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
+        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.URL}}</span>
+      </button>
+    </li>
+    <li class="flex-1">
+      <button (click)="selectOption(QrCodeType.TEXT)"
+              [ngClass]="{
+                'bg-purple-700': currentSelection === QrCodeType.TEXT && !isDarkMode,
+                'dark:bg-gray-700': currentSelection === QrCodeType.TEXT && isDarkMode,
+                'hover:bg-purple-700': !isDarkMode,
+                'dark:hover:bg-gray-700': isDarkMode
+              }"
+              class="w-full text-left p-2 rounded flex items-center space-x-2">
+        <ng-icon name="heroDocumentText" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
+        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.TEXT}}</span>
+      </button>
+    </li>
+    <li class="flex-1">
+      <button (click)="selectOption(QrCodeType.EMAIL)"
+              [ngClass]="{
+                'bg-purple-700': currentSelection === QrCodeType.EMAIL && !isDarkMode,
+                'dark:bg-gray-700': currentSelection === QrCodeType.EMAIL && isDarkMode,
+                'hover:bg-purple-700': !isDarkMode,
+                'dark:hover:bg-gray-700': isDarkMode
+              }"
+              class="w-full text-left p-2 rounded flex items-center space-x-2">
+        <ng-icon name="heroEnvelope" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
+        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.EMAIL}}</span>
+      </button>
+    </li>
+    <li class="flex-1">
+      <button (click)="selectOption(QrCodeType.IMAGE)"
+              [ngClass]="{
+                'bg-purple-700': currentSelection === QrCodeType.IMAGE && !isDarkMode,
+                'dark:bg-gray-700': currentSelection === QrCodeType.IMAGE && isDarkMode,
+                'hover:bg-purple-700': !isDarkMode,
+                'dark:hover:bg-gray-700': isDarkMode
+              }"
+              class="w-full text-left p-2 rounded flex items-center space-x-2">
+        <ng-icon name="heroPhoto" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
+        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.IMAGE}}</span>
+      </button>
+    </li>
+    <li class="flex-1">
+      <button (click)="selectOption(QrCodeType.WIFI)"
+              [ngClass]="{
+                'bg-purple-700': currentSelection === QrCodeType.WIFI && !isDarkMode,
+                'dark:bg-gray-700': currentSelection === QrCodeType.WIFI   && isDarkMode,
+                'hover:bg-purple-700': !isDarkMode,
+                'dark:hover:bg-gray-700': isDarkMode
+              }"
+              class="w-full text-left p-2 rounded flex items-center space-x-2">
+        <ng-icon name="heroWifi" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
+        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.WIFI}}</span>
+      </button>
+    </li>
+  </ul>
+</div>
