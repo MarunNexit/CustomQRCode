@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QrImgFormComponent } from './qr-img-form.component';
+import { QrFileFormComponent } from './qr-file-form.component';
 
 describe('QrImgFormComponent', () => {
-  let component: QrImgFormComponent;
-  let fixture: ComponentFixture<QrImgFormComponent>;
+  let component: QrFileFormComponent;
+  let fixture: ComponentFixture<QrFileFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QrImgFormComponent]
+      imports: [QrFileFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(QrImgFormComponent);
+    fixture = TestBed.createComponent(QrFileFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

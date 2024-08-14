@@ -2,6 +2,6 @@ export enum QrCodeType {
   URL = 'Link',
   TEXT = 'Text',
   EMAIL = 'E-mail',
-  IMAGE = 'Image',
+  FILE = 'File',
   WIFI = 'Wi-Fi',
 }

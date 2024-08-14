@@ -1,6 +1,7 @@
-<form [formGroup]="urlForm" (ngSubmit)="onSubmitUrl()">
+<div class="text-xl font-medium">Generate a QR Code from a Link</div>
+<p class="text-slate-500">You have a new message! You have a new message! You have a new message! You have a new message! You have a new message!</p>
 
-
+<form [formGroup]="urlForm" (ngSubmit)="onSubmitUrl()" class="mt-6">
   <div class="mb-4">
     <label for="url" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Enter URL:</label>
     <input id="url" formControlName="url" type="text" placeholder="https://example.com"
@@ -9,7 +10,9 @@
 
   <app-qr-color></app-qr-color>
 
-  <button type="submit" class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded">
+  <button type="submit"
+          class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded"
+          [disabled]="urlForm.invalid">
     Generate QR Code
   </button>
 </form>

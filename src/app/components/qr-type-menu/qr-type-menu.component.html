@@ -40,16 +40,16 @@
       </button>
     </li>
     <li class="flex-1">
-      <button (click)="selectOption(QrCodeType.IMAGE)"
+      <button (click)="selectOption(QrCodeType.FILE)"
               [ngClass]="{
-                'bg-purple-700': currentSelection === QrCodeType.IMAGE && !isDarkMode,
-                'dark:bg-gray-700': currentSelection === QrCodeType.IMAGE && isDarkMode,
+                'bg-purple-700': currentSelection === QrCodeType.FILE && !isDarkMode,
+                'dark:bg-gray-700': currentSelection === QrCodeType.FILE && isDarkMode,
                 'hover:bg-purple-700': !isDarkMode,
                 'dark:hover:bg-gray-700': isDarkMode
               }"
               class="w-full text-left p-2 rounded flex items-center space-x-2">
         <ng-icon name="heroPhoto" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
-        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.IMAGE}}</span>
+        <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.FILE}} (image, pdf, docx...)</span>
       </button>
     </li>
     <li class="flex-1">

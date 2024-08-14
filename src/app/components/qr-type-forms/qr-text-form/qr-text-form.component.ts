@@ -19,14 +19,18 @@ export class QrTextFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.textForm = this.fb.group({
-      text: ['', Validators.required, Validators.maxLength(400)]
+      text: ['', [Validators.required, Validators.maxLength(400)]]
     });
   }
 
   onSubmitText(): void {
+    console.log(this.textForm);
     if (this.textForm.valid) {
       const textValue = this.textForm.get('text')?.value;
       this.textFormSubmit.emit(textValue);
+    }
+    else {
+      alert('Enter valid Text')
     }
   }
 

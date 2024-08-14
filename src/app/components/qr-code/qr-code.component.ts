@@ -1,42 +1,100 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FixMeLater, QRCodeModule} from 'angularx-qrcode';
 import {QrTypeMenuComponent} from "../qr-type-menu/qr-type-menu.component";
 import {QrCodeType} from "../../models/qr-code-types.enum";
-import {NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {NgClass, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
 import {QrUrlFormComponent} from "../qr-type-forms/qr-url-form/qr-url-form.component";
 import {QrTextFormComponent} from "../qr-type-forms/qr-text-form/qr-text-form.component";
 import {SafeUrl} from "@angular/platform-browser";
+import {QrFileFormComponent} from "../qr-type-forms/qr-file-form/qr-file-form.component";
+import {QrWifiFormComponent} from "../qr-type-forms/qr-wifi-form/qr-wifi-form.component";
+import {QrEmailFormComponent} from "../qr-type-forms/qr-email-form/qr-email-form.component";
 
 @Component({
   selector: 'app-qr-code',
   standalone: true,
-  imports: [QRCodeModule, QrTypeMenuComponent, NgSwitch, NgSwitchCase, NgSwitchDefault, ReactiveFormsModule, QrUrlFormComponent, QrTextFormComponent],
+  imports: [QRCodeModule, QrTypeMenuComponent, NgSwitch, NgSwitchCase, NgSwitchDefault, ReactiveFormsModule, QrUrlFormComponent, QrTextFormComponent, NgIf, QrFileFormComponent, NgClass],
   templateUrl: './qr-code.component.html',
   styleUrl: './qr-code.component.css'
 })
-export class QrCodeComponent {
+export class QrCodeComponent{
 
   currentView: QrCodeType = QrCodeType.URL;
   elementType:string = 'canvas';
+  dataType: "url" | "text" | "email" | "file" | "wifi" = "url"
   qrInputData: string = 'https://github.com/MarunNexit';
   public qrCodeSrc!: SafeUrl
+  qrCodeGenerationLoading: boolean = false;
+
+  @ViewChild(QrUrlFormComponent) qrUrlFormComponent!: QrUrlFormComponent;
+  @ViewChild(QrTextFormComponent) qrTextFormComponent!: QrTextFormComponent;
+  @ViewChild(QrFileFormComponent) qrFileFormComponent!: QrFileFormComponent;
+  @ViewChild(QrWifiFormComponent) qrWifiFormComponent!: QrWifiFormComponent;
+  @ViewChild(QrEmailFormComponent) qrEmailFormComponent!: QrEmailFormComponent;
 
   onSelectionChange(selectedOption: QrCodeType) {
     this.currentView = selectedOption;
   }
   onUrlFormSubmit(url: string) {
     this.generateQRCode(url);
+    this.dataType = 'url'
   }
-
   onTextFormSubmit(text: string) {
-    this.generateQRCode(undefined, text); // Передаємо `undefined` для url
+    this.generateQRCode(undefined, text);
+    this.dataType = 'text'
+  }
+  onFileFormSubmit(url: string) {
+    this.generateQRCode(url, undefined);
+    this.dataType = 'file'
   }
 
   onChangeURL(url: SafeUrl) {
     this.qrCodeSrc = url
   }
+
+
+  generateQRCodeAdditionButton() {
+    switch (this.currentView) {
+      case QrCodeType.URL:
+        this.qrUrlFormComponent.onSubmitUrl();
+        console.log('Data from child: URL');
+        break;
+
+      case QrCodeType.TEXT:
+        this.qrTextFormComponent.onSubmitText();
+        console.log('Data from child: URL');
+        break;
+
+      case QrCodeType.FILE:
+        this.qrFileFormComponent.onSubmitFile();
+        console.log('Data from child: URL');
+        break;
+
+      case QrCodeType.EMAIL:
+/*        this.qrUrlFormComponent.onSubmitUrl();
+        console.log('Data from child: URL');*/
+        break;
+
+      case QrCodeType.WIFI:
+/*        this.qrUrlFormComponent.onSubmitUrl();
+        console.log('Data from child: URL');*/
+        break;
+      default:
+        console.warn('Unsupported QR Code type');
+    }
+  }
+
+  qrCodeLoading(){
+    this.qrCodeGenerationLoading = true;
+
+    setTimeout(() => {
+      this.qrCodeGenerationLoading = false;
+    }, 1000);
+  }
+
   generateQRCode(url?: string, text?: string) {
+    this.qrCodeLoading()
     switch (this.currentView) {
       case QrCodeType.URL:
         if (url) {
@@ -47,6 +105,12 @@ export class QrCodeComponent {
       case QrCodeType.TEXT:
         if (text) {
           this.qrInputData = text;
+        }
+        break;
+
+      case QrCodeType.FILE:
+        if (url) {
+          this.qrInputData = url;
         }
         break;
 

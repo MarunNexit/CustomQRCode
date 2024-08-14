@@ -12,3 +12,8 @@
   -webkit-user-drag: none; /* Для Chrome/Safari */
   user-drag: none; /* Для інших браузерів */
 }
+
+button:disabled {
+  cursor: not-allowed; /* Курсор у вигляді забороненого знака */
+  opacity: 0.7; /* Зниження прозорості */
+}

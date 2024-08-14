@@ -1,0 +1,50 @@
+<div class=" mx-auto dark:bg-gray-800 rounded-xl ">
+  <div class="items-center ">
+    <div class="text-xl font-medium">Generate a QR Code from a File</div>
+    <p class="m-0 p-0 text-slate-500" >If you want to generate a QR code for a file, and you already have it uploaded somewhere online (e.g., Google Drive or another platform), you only need the link to that file.</p>
+    <button
+      (click)="onRedirect()"
+      class="w-full bg-purple-500 hover:bg-purple-600 font-semibold py-2 px-4 rounded text-nowrap mt-4"
+    >
+      Input the Link
+    </button>
+  </div>
+
+  <form [formGroup]="fileForm" (ngSubmit)="onSubmitFile()" class="space-y-6 mt-6 p-6  ">
+    <p class="text-xl font-semibold  mb-4">Input a File</p>
+
+    <div *ngIf="fileLinkAvailable; else uploadSection">
+      <p class="text-lg font-medium text-green-600">File already uploaded!</p>
+      <button
+        type="submit"
+        class="mt-4 bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded disabled:opacity-50"
+      >
+        Generate QR Code
+      </button>
+    </div>
+    <ng-template #uploadSection>
+      <div class="flex flex-col space-y-4">
+        <input
+          type="file"
+          (change)="onFileChange($event)"
+          formControlName="file"
+          class="border border-gray-300 rounded-lg p-2 bg-gray-50 dark:bg-gray-700"
+          accept=".pdf,.docx,.xlsx,.png,.jpg,.jpeg"
+        />
+        <div class="text-red-600" *ngIf="fileForm.get('file')?.invalid && fileForm.get('file')?.touched">
+          <p *ngIf="fileForm.get('file')?.errors?.['required']">File is required.</p>
+          <p *ngIf="fileForm.get('file')?.errors?.['maxSize']">File size must not exceed 5 MB.</p>
+        </div>
+        <button
+          type="button"
+          (click)="onUploadFile()"
+          [disabled]="fileForm.invalid"
+          class="bg-green-500 hover:bg-green-400 text-white font-semibold py-2 px-4 rounded disabled:opacity-50"
+        >
+          Upload File
+        </button>
+      </div>
+    </ng-template>
+
+  </form>
+</div>

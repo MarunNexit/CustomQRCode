@@ -4,21 +4,19 @@
       <app-qr-type-menu (selectionChangeQrCodeType)="onSelectionChange($event)"></app-qr-type-menu>
 
       <div [ngSwitch]="currentView" class="p-12">
-        <div class="text-xl font-medium">QR Code Generator</div>
-        <p class="text-slate-500">You have a new message! You have a new message! You have a new message! You have a new message! You have a new message!</p>
-        <div *ngSwitchCase="QrCodeType.URL" class="pt-6">
+        <div *ngSwitchCase="QrCodeType.URL" class="pt-2">
           <app-qr-url-form (urlFormSubmit)="onUrlFormSubmit($event)"></app-qr-url-form>
         </div>
-        <div *ngSwitchCase="QrCodeType.TEXT" class="pt-6">
+        <div *ngSwitchCase="QrCodeType.TEXT" class="pt-2">
           <app-qr-text-form (textFormSubmit)="onTextFormSubmit($event)"></app-qr-text-form>
         </div>
-        <div *ngSwitchCase="QrCodeType.EMAIL" class="pt-6">
+        <div *ngSwitchCase="QrCodeType.EMAIL" class="pt-2">
           Coming Soon
         </div>
-        <div *ngSwitchCase="QrCodeType.IMAGE" class="pt-6">
-          Coming Soon
+        <div *ngSwitchCase="QrCodeType.FILE" class="pt-2">
+          <app-qr-file-form (fileFormSubmit)="onFileFormSubmit($event)"></app-qr-file-form>
         </div>
-        <div *ngSwitchCase="QrCodeType.WIFI" class="pt-6">
+        <div *ngSwitchCase="QrCodeType.WIFI" class="pt-2">
           Coming Soon
         </div>
         <div *ngSwitchDefault>
@@ -31,11 +29,23 @@
       <p style="font-family: 'Nova Square', cursive;" class=" flex justify-center text-5xl">CustomQR</p>
       <div class="flex flex-col items-center pt-6">
         <qrcode #parent
+                [ngClass]="qrCodeGenerationLoading ? 'hidden' : 'visible'"
                 [qrdata]="qrInputData"
                 [width]="256" [errorCorrectionLevel]="'M'"
+                [dataType]="'url'"
                 (qrCodeURL)="onChangeURL($event)"
                 class="p-4"
         ></qrcode>
+        <ng-container *ngIf="qrCodeGenerationLoading">
+          <p>Loading...</p>
+        </ng-container>
+        <div>
+          <button class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 m-2 px-4 rounded"
+                  (click)="generateQRCodeAdditionButton()"
+          >
+            Generate QR Code
+          </button>
+        </div>
         <div class="downloadButton">
           <button class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 m-2 px-4 rounded"
             (click)="saveAsImage(parent)"

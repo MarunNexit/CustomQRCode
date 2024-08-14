@@ -1,15 +1,20 @@
-<form [formGroup]="textForm" (ngSubmit)="onSubmitText()">
+<div class="text-xl font-medium">Generate a QR Code from a Text</div>
+<p class="text-slate-500">You have a new message! You have a new message! You have a new message! You have a new message! You have a new message!</p>
+
+<form [formGroup]="textForm" (ngSubmit)="onSubmitText()" class="mt-6">
   <div class="mb-4">
     <label for="text" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Enter Text:</label>
     <textarea id="text" formControlName="text" placeholder="Your text here"
               class="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 resize-y"
               rows="6" maxlength="400" (input)="updateCharacterCount($event)"></textarea>
     <div class="flex justify-end items-center mt-1">
+      <span *ngIf="textForm.controls['text'].hasError('maxlength')" class="text-xs text-red-600 dark:text-red-400 ml-2 pr-2">Maximum 400 characters allowed</span>
       <span class="text-xs text-gray-600 dark:text-gray-400">{{ inputTextCharacterCount }}/400</span>
-      <span *ngIf="textForm.controls['text'].hasError('maxlength')" class="text-red-600 dark:text-red-400 text-sm ml-2">Maximum 400 characters allowed</span>
     </div>
   </div>
-  <button type="submit" class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded">
+  <button type="submit"
+          class="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded"
+          [disabled]="textForm.invalid">
     Generate QR Code
   </button>
 </form>
