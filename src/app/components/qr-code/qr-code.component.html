@@ -10,15 +10,19 @@
         <div *ngSwitchCase="QrCodeType.TEXT" class="pt-2">
           <app-qr-text-form (textFormSubmit)="onTextFormSubmit($event)"></app-qr-text-form>
         </div>
+
         <div *ngSwitchCase="QrCodeType.EMAIL" class="pt-2">
           Coming Soon
         </div>
+
         <div *ngSwitchCase="QrCodeType.FILE" class="pt-2">
           <app-qr-file-form (fileFormSubmit)="onFileFormSubmit($event)"></app-qr-file-form>
         </div>
+
         <div *ngSwitchCase="QrCodeType.WIFI" class="pt-2">
           Coming Soon
         </div>
+
         <div *ngSwitchDefault>
           <div class="text-xl font-medium">Default View</div>
           <p class="text-slate-500">This is the default content if no case matches.</p>

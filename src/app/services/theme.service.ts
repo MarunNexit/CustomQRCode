@@ -11,7 +11,7 @@ export class ThemeService {
   private themeSubject: BehaviorSubject<string>;
 
   constructor() {
-    const initialTheme = localStorage.getItem(this.themeKey) || 'light';
+    const initialTheme = localStorage.getItem(this.themeKey) || 'dark';
     this.themeSubject = new BehaviorSubject<string>(initialTheme);
     this.initializeTheme();
   }

@@ -26,7 +26,12 @@
         <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.TEXT}}</span>
       </button>
     </li>
-    <li class="flex-1">
+
+
+<!--
+    // TODO
+-->
+    <!--<li class="flex-1">
       <button (click)="selectOption(QrCodeType.EMAIL)"
               [ngClass]="{
                 'bg-purple-700': currentSelection === QrCodeType.EMAIL && !isDarkMode,
@@ -38,7 +43,9 @@
         <ng-icon name="heroEnvelope" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
         <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.EMAIL}}</span>
       </button>
-    </li>
+    </li>-->
+
+
     <li class="flex-1">
       <button (click)="selectOption(QrCodeType.FILE)"
               [ngClass]="{
@@ -52,7 +59,12 @@
         <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.FILE}} (image, pdf, docx...)</span>
       </button>
     </li>
-    <li class="flex-1">
+
+
+<!--
+    // TODO
+-->
+    <!--<li class="flex-1">
       <button (click)="selectOption(QrCodeType.WIFI)"
               [ngClass]="{
                 'bg-purple-700': currentSelection === QrCodeType.WIFI && !isDarkMode,
@@ -64,6 +76,6 @@
         <ng-icon name="heroWifi" class="h-5 w-5 text-gray-300 dark:text-gray-500"></ng-icon>
         <span class="whitespace-nowrap overflow-hidden truncate">{{QrCodeType.WIFI}}</span>
       </button>
-    </li>
+    </li>-->
   </ul>
 </div>
